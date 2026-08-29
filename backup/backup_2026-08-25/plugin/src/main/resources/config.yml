@@ -1,0 +1,18 @@
+# inhGraphics — персональная графика для игроков
+
+# Раскаты грома при персональной грозе (чисто звук, урона нет)
+thunder-sound: true
+# Интервал между раскатами, секунды (случайное число в диапазоне)
+thunder-interval-min: 20
+thunder-interval-max: 60
+
+# Туман из частиц
+fog:
+  # Тип частицы (Bukkit Particle enum): CLOUD, CAMPFIRE_COSY_SMOKE, WHITE_ASH...
+  particle: CLOUD
+  # Радиус облака тумана вокруг игрока, блоки
+  radius: 7.0
+  # Высота слоя тумана над глазами игрока, блоки
+  height: 2.0
+  # Спавн каждые N тиков
+  period-ticks: 3
