@@ -1,0 +1,15 @@
+[AUTO-OP] выдаю op игроку [38;2;255;255;85mBelisarius_kawl[0m
+>>> op [38;2;255;255;85mBelisarius_kawl[0m
+Made [38;2;255;255;85mBelisarius_kawl[0m a server operator
+[AUTO-OP] выдаю op игроку Belisarius_kawl
+>>> op Belisarius_kawl
+Nothing changed. The player already is an operator
+[AUTO-OP] выдаю op игроку ChatSpy
+>>> op ChatSpy
+Made ChatSpy a server operator
+[AUTO-OP] выдаю op игроку TestBot
+>>> op TestBot
+Made TestBot a server operator
+[AUTO-OP] выдаю op игроку Belisarius_kawl
+>>> op Belisarius_kawl
+Nothing changed. The player already is an operator
