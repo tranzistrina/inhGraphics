@@ -1,8 +1,0 @@
-players:
-  c96061c8-2cd1-36bd-a8f5-7615dafde5bd:
-    time: 2763
-    weather: NONE
-    render: -1
-    default-render: -1
-    fog-on: false
-    fog-density: 5
