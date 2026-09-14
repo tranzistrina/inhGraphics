@@ -34,6 +34,7 @@ public final class IgRenderCommand implements CommandExecutor, TabCompleter {
             d.renderDistance = -1;
             Applier.applyRender(plugin, target, d);
             plugin.getStore().save(target.getUniqueId());
+            plugin.sendCompatibility(target);
             sender.sendRichMessage("<gray>" + CmdHelper.whoName(target, sender)
                     + " — прорисовка снова мировая.");
             return true;
@@ -53,6 +54,7 @@ public final class IgRenderCommand implements CommandExecutor, TabCompleter {
         d.renderDistance = radius;
         Applier.applyRender(plugin, target, d);
         plugin.getStore().save(target.getUniqueId());
+        plugin.sendCompatibility(target);
         sender.sendRichMessage("<green>" + CmdHelper.whoName(target, sender)
                 + " — сервер шлёт только <gold>" + radius
                 + "</gold> чанков вокруг. За границей будет честный обрыв мира: так и задумано.");

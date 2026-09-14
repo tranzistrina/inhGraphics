@@ -1,7 +1,7 @@
 name: inhGraphics
 version: '1.0.0'
 main: ru.khozain.inhgraphics.InhGraphicsPlugin
-api-version: '1.21'
+api-version: '26.2'
 author: Khozain
 description: 'Персональные погода, время, прорисовка и туман для отдельных игроков'
 commands:
@@ -24,6 +24,10 @@ commands:
   igreset:
     description: 'Полный сброс персональных настроек'
     usage: '/igreset <ник|all>'
+    permission: inhgraphics.admin
+  igmods:
+    description: 'Список плагинов сервера и объявленных модов клиента'
+    usage: '/igmods [ник]'
     permission: inhgraphics.admin
 permissions:
   inhgraphics.admin:

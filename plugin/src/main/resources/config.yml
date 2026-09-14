@@ -16,3 +16,8 @@ fog:
   height: 2.0
   # Спавн каждые N тиков
   period-ticks: 3
+
+# Совместимость с Bobby, Distant Horizons и Voxy через необязательный клиентский мод.
+compatibility:
+  client-cache-sync: true
+  log-client-reports: false

@@ -5,12 +5,6 @@ plugins {
 group = 'ru.khozain'
 version = '1.0.0'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 repositories {
     mavenCentral()
     maven {
@@ -19,16 +13,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:26.2.build.121-stable'
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release.set(targetJavaVersion)
-    }
+    options.release.set(targetJavaVersion)
 }
 
 jar {

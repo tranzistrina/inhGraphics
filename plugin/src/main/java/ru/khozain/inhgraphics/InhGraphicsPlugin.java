@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import ru.khozain.inhgraphics.commands.IgFogCommand;
+import ru.khozain.inhgraphics.commands.IgModsCommand;
 import ru.khozain.inhgraphics.commands.IgResetCommand;
 import ru.khozain.inhgraphics.commands.IgRenderCommand;
 import ru.khozain.inhgraphics.commands.IgTimeCommand;
@@ -29,18 +30,22 @@ public final class InhGraphicsPlugin extends JavaPlugin implements Listener {
     private int thunderMaxSeconds;
     private BukkitTask fogTask;
     private BukkitTask thunderTask;
+    private ClientModRegistry clientMods;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         readConfig();
         store = new PlayerStore(this);
+        clientMods = new ClientModRegistry(this);
+        clientMods.register();
 
         register("igtime", new IgTimeCommand(this));
         register("igweather", new IgWeatherCommand(this));
         register("igrender", new IgRenderCommand(this));
         register("igfog", new IgFogCommand(this));
         register("igreset", new IgResetCommand(this));
+        register("igmods", new IgModsCommand(this));
 
         getServer().getPluginManager().registerEvents(this, this);
 
@@ -53,6 +58,7 @@ public final class InhGraphicsPlugin extends JavaPlugin implements Listener {
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
             applyStored(p); // на случай /reload
+            clientMods.sendSync(p);
         }
         getLogger().info("inhGraphics включён: персональная графика готова к художествам.");
     }
@@ -61,6 +67,7 @@ public final class InhGraphicsPlugin extends JavaPlugin implements Listener {
     public void onDisable() {
         if (fogTask != null) fogTask.cancel();
         if (thunderTask != null) thunderTask.cancel();
+        if (clientMods != null) clientMods.unregister();
         getLogger().info("inhGraphics выключен.");
     }
 
@@ -103,6 +110,16 @@ public final class InhGraphicsPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         applyStored(event.getPlayer());
+        Bukkit.getScheduler().runTaskLater(this, () -> clientMods.sendSync(event.getPlayer()), 20L);
+    }
+
+    @org.bukkit.event.EventHandler
+    public void onQuit(org.bukkit.event.player.PlayerQuitEvent event) {
+        clientMods.remove(event.getPlayer());
+    }
+
+    public void sendCompatibility(Player player) {
+        if (clientMods != null) clientMods.sendSync(player);
     }
 
     /**
@@ -158,5 +175,9 @@ public final class InhGraphicsPlugin extends JavaPlugin implements Listener {
 
     public int thunderMaxSeconds() {
         return thunderMaxSeconds;
+    }
+
+    public ClientModRegistry clientMods() {
+        return clientMods;
     }
 }

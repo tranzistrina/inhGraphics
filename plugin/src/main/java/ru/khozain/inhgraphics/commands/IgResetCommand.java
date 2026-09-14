@@ -35,6 +35,7 @@ public final class IgResetCommand implements CommandExecutor, TabCompleter {
                 boolean hadSomething = d.isDirty();
                 plugin.getStore().reset(p.getUniqueId());
                 Applier.applyAll(plugin, p, d);
+                plugin.sendCompatibility(p);
                 if (hadSomething) n++;
             }
             sender.sendRichMessage("<gray>Сброшены настройки у всех онлайн (" + n
@@ -50,6 +51,7 @@ public final class IgResetCommand implements CommandExecutor, TabCompleter {
         }
         plugin.getStore().reset(target.getUniqueId());
         Applier.applyAll(plugin, target, plugin.getStore().get(target.getUniqueId()));
+        plugin.sendCompatibility(target);
         sender.sendRichMessage("<gray>" + target.getName()
                 + ": время, погода, прорисовка и туман сброшены к мировым значениям.");
         return true;
